@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>With Kids Go Where</title>
+</head>
+
+<body>
+    <div class="container">
+        <p>I am a parent living in the  
+            <select id="location">
+                <option value="east">east</option>
+                <option value="west">west</option>
+                <option value="north">north</option>
+                <option value="south">south</option>
+            </select>
+            of Singapore
+
+        <p>I want to 
+            <select id="activity">
+                <option value="eat">eat</option>
+                <option value="play">play</option>
+                <option value="eat and play">eat and play</option>
+            </select> 
+            with my children this weekend.
+        </p>
+        <button class="button" onclick="showResults()">Where should we go?</button>
+    </div>
+
+    <script>
+        function showResults() {
+            window.location.href = 'results.html';
+        }
+    </script>
+
+</body>
+
+</html>
