@@ -6,103 +6,123 @@ var destinations = [
       name: "Canopy Changi Village",
       area: "east",
       activity: "eat",
-      description: "This is a description of something to play in the east",
+      link: "https://www.canopygardendining.com/location/canopy-changi-village/"
     },
     {
       name: "Plank Sourdough Pizza Faber Drive",
       area: "west",
       activity: "eat",
-      description: "This is a description of something to play in the west",
-    },
-    {
-      name: "The Vineyard at Hort Park",
-      area: "south",
-      activity: "play",
-      description: "This is a description of something to play in the north",
+      link: "https://plankpizza.biz/our-locations/"
     },
     {
       name: "Bee's Knees",
       area: "central",
       activity: "eat",
-      description: "This is a description of something to play in the south",
+      link: "https://www.beesknees.sg/beesknees-garage-menu"
+    },
+    {
+      name: "The Vineyard at Hort Park",
+      area: "south",
+      activity: "eat",
+      link: "https://www.vineyardhortpark.com.sg/"
+    },
+    {
+    name: "Bollywood Veggies",
+    area: "north",
+    activity: "eat",
+    link: "https://bollywoodfarms.com/"
     },
     {
       name: "Chaos Lab",
       area: "east",
       activity: "play",
-      description: "This is a description of something to eat in the east",
+      link: "https://chaos-lab.co/singapore/"
     },
     {
       name: "Science Centre KidsSTOP",
       area: "west",
       activity: "play",
-      description: "This is a description of something to eat in the west",
+      link: "https://www.science.edu.sg/visit-us/kidsstop"
     },
     {
       name: "KidZania",
       area: "south",
-      activity: "eat",
-      description: "This is a description of something to eat in the north",
+      activity: "play",
+      link: "https://www.kidzania.com.sg/"
     },
     {
       name: "Mandai Wildlife Reserves",
       area: "north",
       activity: "play",
-      description: "This is a description of something else to eat in the north",
+      link: "https://www.mandai.com/en.html"
     },
     {
       name: "Keppel Centre for Art Education",
       area: "central",
       activity: "play",
-      description: "This is a description of something to eat in the south",
+      link: "https://www.nationalgallery.sg/gallerykids/keppelcentre"
     },
     {
       name: "Wheeler's Estate",
-      area: "east",
+      area: "north",
       activity: "both",
-      description: "This is a description of something to eat in the south",
+      link: "https://wheelersestate.com/"
     },
     {
       name: "Cafe Melba Mediapolis",
       area: "west",
       activity: "both",
-      description: "This is a description of something to eat in the south",
+      link: "https://www.cafemelba.com.sg/locations"
     },
     {
       name: "Marche VivoCity",
       area: "south",
       activity: "both",
-      description: "This is a description of something to eat in the south",
+      link: "https://www.marche-movenpick.sg/en/our-locations/vivocity"
     },
     {
       name: "Prive Botanic Gardens",
       area: "central",
       activity: "both",
-      description: "This is a description of something to eat in the south",
+      link: "https://www.theprivegroup.com.sg/prive-botanic-gardens"
+    },
+    {
+      name: "Prive Botanic Gardens",
+      area: "east",
+      activity: "both",
+      link: "https://www.eccommune.com/"
     },
   ];
   
+  //get the user's inputs on activity and area from the previous page to this second results page.
   var params = new URLSearchParams(window.location.search);
   var selectedArea = params.get("area");
   var selectedActivity = params.get("activity");
   
+  //based on the user's inputs on desired activity and area, find the destination that matches
   var destination = destinations.find(
     (destination) =>
       destination.area === selectedArea &&
       destination.activity === selectedActivity
   );
+  //use a grid container to display the result
   var gridContainer = document.getElementById("grid-container");
   
+  //if there is a destination that matches both the selectedArea and selectedActivity, create a h4 element with the name of the destination and append it into the grid container
   if (destination) {
     var nameElement = document.createElement("h4");
     nameElement.innerText = destination.name;
     nameElement.classList.add("name");
     gridContainer.appendChild(nameElement);
-  
-    var description = document.createElement("p");
-    description.innerText = destination.description;
-    description.classList.add("description");
-    gridContainer.appendChild(description);
+
+    //create a link with the URL link of the destination and append it into the grid container 
+    var link = document.createElement("a")
+    link.innerText = "Find Out More"
+    console.log(destination.link)
+    link.href = destination.link
+    gridContainer.appendChild(link)
+
+    //show an error message if there are no matches
   } else {
     var noResultsMessage = document.createElement("p");
     noResultsMessage.innerText =
@@ -111,7 +131,8 @@ var destinations = [
     gridContainer.appendChild(noResultsMessage);
   }
   
-  function back() {
-    window.location.replace("/");
+  //function to go back to the main page DOES NOT WORK
+  function goBack() {
+    window.history.back();
   }
   
