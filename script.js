@@ -8,9 +8,7 @@
 function showResults() {
     var area = document.getElementById("area").value; //should be east, west, central, north or south
     var activity = document.getElementById("activity").value; //should be whatever the user selected; "eat", "play", or "eat and play"
-  
-    console.log(`selected area is ${area}`);
-    console.log(`selected activity is ${activity}`);
+ 
  
     //include error messages if no options are selected
     if (area === "default") {
