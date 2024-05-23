@@ -140,8 +140,8 @@ var destinations = [
     gridContainer.appendChild(noResultsMessage);
   }
   
-  //function to go back to the main page to enter a different set of parameters DOES NOT WORK
-  function goBack() {
-    window.history.back();
+  //function to go back to the main page to enter a different set of parameters.  window.location.replace("/"), is used to navigate to the root of the current domain without leaving a record in the browser's history for the current page.
+  function back() {
+    window.location.replace("/");
   }
   
