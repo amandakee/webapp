@@ -87,7 +87,7 @@ var destinations = [
       link: "https://www.theprivegroup.com.sg/prive-botanic-gardens"
     },
     {
-      name: "Prive Botanic Gardens",
+      name: "East Coast Commune",
       area: "east",
       activity: "both",
       link: "https://www.eccommune.com/"
