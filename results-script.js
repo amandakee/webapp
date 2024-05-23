@@ -1,4 +1,4 @@
-//we've managed to "grab" what the user selected. Now we need to do something with it.
+//we've managed to "grab" what the user selected. Now we need to generate the correct results with it.
 
 //start with a whole list of destinations
 var destinations = [
@@ -95,20 +95,29 @@ var destinations = [
   ];
   
   //get the user's inputs on activity and area from the previous page to this second results page.
+  //first, we create a new object called params to access and manipulate the parameters in the query string from the current URL. we do this by using the urlsearchparams API
+
   var params = new URLSearchParams(window.location.search);
+
+  //next, we create two new objects - the selected area and the selected activity by using the GET request i.e. get the area or activity parameter in the params object
   var selectedArea = params.get("area");
   var selectedActivity = params.get("activity");
   
-  //based on the user's inputs on desired activity and area, find the destination that matches
+  //based on the user's inputs on selected activity and area, we write an algorithm to find the destination that matches
+  //we used the find method to search through my array of destinations and find the one that matches the selectedArea and selectedActivity
+  //the destination will be stored in the variable destination
+  //=== is used to compare two values or expressions, and it checks both the value and the type. This means that for the comparison to return true, the operands must be of the same type in addition to having the same value.
   var destination = destinations.find(
     (destination) =>
       destination.area === selectedArea &&
       destination.activity === selectedActivity
   );
+
   //use a grid container to display the result
+  //first, we create a gridContainer variable using getElementbyID 
   var gridContainer = document.getElementById("grid-container");
   
-  //if there is a destination that matches both the selectedArea and selectedActivity, create a h4 element with the name of the destination and append it into the grid container
+  //if there is a 'destination' i.e. a destination that matches both the selectedArea and selectedActivity, create a h4 element with the name of the destination and append it into the grid container
   if (destination) {
     var nameElement = document.createElement("h4");
     nameElement.innerText = destination.name;
@@ -131,7 +140,7 @@ var destinations = [
     gridContainer.appendChild(noResultsMessage);
   }
   
-  //function to go back to the main page DOES NOT WORK
+  //function to go back to the main page to enter a different set of parameters DOES NOT WORK
   function goBack() {
     window.history.back();
   }

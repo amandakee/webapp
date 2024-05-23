@@ -21,3 +21,8 @@ function showResults() {
   //the next thing the function should do is link us to the next page DO NOT UNDERSTAND
   window.location.replace(`results.html?area=${area}&activity=${activity}`);
   }
+
+  //when user clicks the about button, it should lead to the html page with the problem statement and overview of user reseach info 
+document.getElementById('aboutBtn').addEventListener('click', function() {
+    window.location.href = 'about.html'; 
+});
