@@ -31,7 +31,7 @@ body {
 .button:hover {
     background-color: #0056b3;
 }
-#grid-container {
+#container {
     background-color: #ffffff;
     width: 300px;
     border: 5px solid #00a6ffdf;

@@ -1,6 +1,8 @@
 //we've managed to "grab" what the user selected. Now we need to generate the correct results with it.
 
 //start with a whole list of destinations
+//ideally, this would be updated from some database that is maintained with the latest info
+//but just using this list for this simple web app
 var destinations = [
     {
       name: "Canopy Changi Village",
@@ -95,41 +97,43 @@ var destinations = [
   ];
   
   //get the user's inputs on activity and area from the previous page to this second results page.
-  //first, we create a new object called params to access and manipulate the parameters in the query string from the current URL. we do this by using the urlsearchparams API
-
+  //first, we create a new URLSearchParams object, called params, to read the query parameters from the current URL without having to do complicated string manipulation
   var params = new URLSearchParams(window.location.search);
 
-  //next, we create two new objects - the selected area and the selected activity by using the GET request i.e. get the area or activity parameter in the params object
+  //next, we read the values of the selected area and activity
+  //using the get method from the URLSearchParams object
   var selectedArea = params.get("area");
   var selectedActivity = params.get("activity");
   
-  //based on the user's inputs on selected activity and area, we write an algorithm to find the destination that matches
-  //we used the find method to search through my array of destinations and find the one that matches the selectedArea and selectedActivity
+  //based on the user's inputs on selected activity and area, we write an function to find the destination that matches
+  // === is used to compare two values or expressions for strict equivalence (equal value and type)
+  // && is used to say that BOTH area and activity must match; if either does not, it is not a match
+  function isMatch (destination) {
+    return destination.area === selectedArea &&
+    destination.activity === selectedActivity;
+  }
+  
+  //we used the find array method to search through my array of destinations and find the one that matches the selectedArea and selectedActivity
   //the destination will be stored in the variable destination
-  //=== is used to compare two values or expressions, and it checks both the value and the type. This means that for the comparison to return true, the operands must be of the same type in addition to having the same value.
-  var destination = destinations.find(
-    (destination) =>
-      destination.area === selectedArea &&
-      destination.activity === selectedActivity
-  );
+  var destination = destinations.find(isMatch);
 
-  //use a grid container to display the result
-  //first, we create a gridContainer variable using getElementbyID 
-  var gridContainer = document.getElementById("grid-container");
+  //use a container to display the result
+  //first, we create a container variable using getElementbyID 
+  var container = document.getElementById("container");
   
   //if there is a 'destination' i.e. a destination that matches both the selectedArea and selectedActivity, create a h4 element with the name of the destination and append it into the grid container
   if (destination) {
     var nameElement = document.createElement("h4");
     nameElement.innerText = destination.name;
     nameElement.classList.add("name");
-    gridContainer.appendChild(nameElement);
+    container.appendChild(nameElement);
 
     //create a link with the URL link of the destination and append it into the grid container 
     var link = document.createElement("a")
     link.innerText = "Find Out More"
     console.log(destination.link)
     link.href = destination.link
-    gridContainer.appendChild(link)
+    container.appendChild(link)
 
     //show an error message if there are no matches
   } else {
@@ -137,11 +141,11 @@ var destinations = [
     noResultsMessage.innerText =
       "Sorry, we couldn't find any options for you. Please try another selection!";
     noResultsMessage.classList.add("error-message");
-    gridContainer.appendChild(noResultsMessage);
+    container.appendChild(noResultsMessage);
   }
   
-  //function to go back to the main page to enter a different set of parameters.  window.location.replace("/"), is used to navigate to the root of the current domain without leaving a record in the browser's history for the current page.
+  //function to go back to the main page to enter a different set of parameters.  
   function back() {
-    window.location.replace("/");
+    window.location.href = "/";
   }
   
